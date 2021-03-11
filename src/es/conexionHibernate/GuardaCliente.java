@@ -18,11 +18,26 @@ public class GuardaCliente {
 		Session miSession=miFactory.openSession();
 		
 		try {
-			Clientes cliente1 = new Clientes("luis","montoya","buga");//instanciar objeto cliente
+			Clientes cliente1 = new Clientes("OABAM","SOTO","Cali");//instanciar objeto cliente
 			miSession.beginTransaction();//Empezar transacion;
 			miSession.save(cliente1);//Guardar cliente
 			miSession.getTransaction().commit();//guardar en la bae de datos
 			System.out.println("Registro existoso");
+			
+			//Lectura de registro
+			
+			miSession.beginTransaction();
+			System.out.println("Lectura del registro con id : "+cliente1.getId());
+			
+			Clientes clienteInsertado = miSession.get(Clientes.class, cliente1.getId());
+			
+			System.out.println("Registro : "+clienteInsertado);
+			
+			
+			miSession.getTransaction().commit();//guardar en la bae de datos
+			
+			System.out.println("Terminado");
+			
 			
 			miSession.close();//cerrar la session
 			
