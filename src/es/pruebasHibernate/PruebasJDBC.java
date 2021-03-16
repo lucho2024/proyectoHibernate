@@ -7,7 +7,7 @@ public class PruebasJDBC {
 	
 	public static void main(String[] args) {
 		
-		String jdbcUrl="jdbc:mysql://localhost:3306/pruebashibernate?useSSL=false";
+		String jdbcUrl="jdbc:mysql://localhost:3306/relacioneshibernate?useSSL=false";
 		String usuario ="root";
 		String contra ="";
 		

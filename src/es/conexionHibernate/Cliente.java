@@ -13,8 +13,6 @@ import javax.persistence.Table;
 @Entity //convierte la clase en una entidad para hacer el mapeo
 @Table(name="cliente")
 public class Cliente {
-
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
