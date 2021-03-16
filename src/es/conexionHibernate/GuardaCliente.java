@@ -12,13 +12,13 @@ public class GuardaCliente {
 		//crear el sessionfactory
 		SessionFactory miFactory = new Configuration()
 				.configure("hibernate.cfg.xml")
-				.addAnnotatedClass(Clientes.class)
+				.addAnnotatedClass(Cliente.class)
 				.buildSessionFactory();
 		//crear session
 		Session miSession=miFactory.openSession();
 		
 		try {
-			Clientes cliente1 = new Clientes("OABAM","SOTO","Cali");//instanciar objeto cliente
+			Cliente cliente1 = new Cliente("OABAM","SOTO","Cali");//instanciar objeto cliente
 			miSession.beginTransaction();//Empezar transacion;
 			miSession.save(cliente1);//Guardar cliente
 			miSession.getTransaction().commit();//guardar en la base de datos
@@ -29,7 +29,7 @@ public class GuardaCliente {
 			miSession.beginTransaction();
 			System.out.println("Lectura del registro con id : "+cliente1.getId());
 			
-			Clientes clienteInsertado = miSession.get(Clientes.class, cliente1.getId());
+			Cliente clienteInsertado = miSession.get(Cliente.class, cliente1.getId());
 			
 			System.out.println("Registro : "+clienteInsertado);
 			

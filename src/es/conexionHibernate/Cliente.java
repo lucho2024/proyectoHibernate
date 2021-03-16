@@ -1,15 +1,18 @@
 package es.conexionHibernate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity //convierte la clase en una entidad para hacer el mapeo
-@Table(name="clientes")
-public class Clientes {
+@Table(name="cliente")
+public class Cliente {
 
 
 	@Id
@@ -18,19 +21,23 @@ public class Clientes {
 	private int id;
 	@Column(name="nombre")
 	private String nombre;
-	@Column(name="apellidos")
-	private String apellidos;
+	@Column(name="apellido")
+	private String apellido;
 	@Column(name="direccion")
 	private String direccion;
 	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="id")
+	private DetallesCliente detallesCliente;
 	
-	public Clientes() {
+	
+	public Cliente() {
 		
 	}
-	public Clientes(String nombre, String apellidos, String direccion) {
+	public Cliente(String nombre, String apellido, String direccion) {
 		super();
 		this.nombre = nombre;
-		this.apellidos = apellidos;
+		this.apellido = apellido;
 		this.direccion = direccion;
 	}
 	
@@ -46,11 +53,11 @@ public class Clientes {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getApellidos() {
-		return apellidos;
+	public String getApellido() {
+		return apellido;
 	}
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 	public String getDireccion() {
 		return direccion;
@@ -59,9 +66,15 @@ public class Clientes {
 		this.direccion = direccion;
 	}
 	
+	public DetallesCliente getDetallesCliente() {
+		return detallesCliente;
+	}
+	public void setDetallesCliente(DetallesCliente detallesCliente) {
+		this.detallesCliente = detallesCliente;
+	}
 	@Override
 	public String toString() {
-		return "Clientes [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", direccion=" + direccion
+		return "Clientes [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellido + ", direccion=" + direccion
 				+ "]";
 	}
 	
