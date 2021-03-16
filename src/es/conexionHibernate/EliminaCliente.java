@@ -4,7 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class InsertaCliente {
+public class EliminaCliente {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -19,17 +19,16 @@ public class InsertaCliente {
 				Session miSession=miFactory.openSession();
 
 				try {
-					Cliente cliente1 = new Cliente("apollo","montoya","carrera 1");//instanciar objeto cliente
-					DetallesCliente detallesCliente =
-							new DetallesCliente("apolo.dev","12343232","segundo cliente");//instanciar objeto cliente
-					
-					//asociar los objetos
-					cliente1.setDetallesCliente(detallesCliente);
-					//esto guarda la informacion de las dos tablas relacionadas
+				
 					miSession.beginTransaction();//Empezar transacion;
-					miSession.save(cliente1);//Guardar cliente
+					Cliente miCliente=miSession.get(Cliente.class, 3);
+					if(miCliente!=null) {
+						System.out.println("Voy a eliminar al cliente "+miCliente.getNombre());
+						miSession.delete(miCliente);
+					}
 					miSession.getTransaction().commit();//guardar en la base de datos
-					System.out.println("Registro existoso");
+					if(miCliente!=null)System.out.println("Eliminacion existosa");
+					else System.out.println("Nada que eliminar");
 					
 					miSession.close();//cerrar la session
 					
