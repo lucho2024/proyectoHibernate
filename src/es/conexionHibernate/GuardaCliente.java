@@ -21,7 +21,7 @@ public class GuardaCliente {
 			Clientes cliente1 = new Clientes("OABAM","SOTO","Cali");//instanciar objeto cliente
 			miSession.beginTransaction();//Empezar transacion;
 			miSession.save(cliente1);//Guardar cliente
-			miSession.getTransaction().commit();//guardar en la bae de datos
+			miSession.getTransaction().commit();//guardar en la base de datos
 			System.out.println("Registro existoso");
 			
 			//Lectura de registro
