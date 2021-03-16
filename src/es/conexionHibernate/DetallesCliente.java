@@ -1,10 +1,13 @@
 package es.conexionHibernate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity //convierte la clase en una entidad para hacer el mapeo
@@ -23,7 +26,10 @@ public class DetallesCliente {
 	@Column(name="comentarios")
 	private String comentarios;
 	
+	@OneToOne(mappedBy="detallesCliente",cascade=CascadeType.ALL)
+	private Cliente cliente;
 	
+
 	public DetallesCliente() {
 		
 	}
@@ -75,6 +81,16 @@ public class DetallesCliente {
 	public void setComentarios(String comentarios) {
 		this.comentarios = comentarios;
 	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 
 
 	@Override
