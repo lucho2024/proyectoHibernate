@@ -6,6 +6,7 @@ import java.util.GregorianCalendar;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 public class ObtenerPedidosCliente {
 
@@ -26,12 +27,16 @@ public class ObtenerPedidosCliente {
 					
 					miSession.beginTransaction();//Empezar transacion;
 					//obtener el cliente de la tabla clientes
-					Cliente elCliente = miSession.get(Cliente.class, 6);					
-					miSession.getTransaction().commit();//guardar en la base de datos
-					System.out.println("Cliente: "+elCliente);
-					System.out.println("Pedidos : "+elCliente.getPedidos());
-					System.out.println("Registros existoso");
+					//Cliente elCliente = miSession.get(Cliente.class, 6);		
+					Query<Cliente> consulta = miSession
+							.createQuery("select cl from Cliente cl JOIN FETCH cl.pedidos where cl.id=:clienteId");
 					
+					consulta.setParameter("clienteId", 5);
+					
+					Cliente elCliente = consulta.getSingleResult();//carga en memoria toda la informacion del cliente
+					miSession.getTransaction().commit();//guardar en la base de datos
+				 	System.out.println("Cliente: "+elCliente);
+					//System.out.println("Pedidos : "+elCliente.getPedidos());
 					
 					
 				} catch (Exception e) {
