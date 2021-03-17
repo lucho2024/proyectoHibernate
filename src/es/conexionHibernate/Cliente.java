@@ -1,5 +1,8 @@
 package es.conexionHibernate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -27,6 +31,9 @@ public class Cliente {
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="id")
 	private DetallesCliente detallesCliente;
+	
+	@OneToMany(mappedBy="cliente",cascade= {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
+	private List<Pedido> pedidos;
 	
 	
 	public Cliente() {
@@ -70,10 +77,21 @@ public class Cliente {
 	public void setDetallesCliente(DetallesCliente detallesCliente) {
 		this.detallesCliente = detallesCliente;
 	}
+	
+	
+	
+	
 	@Override
 	public String toString() {
 		return "Clientes [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellido + ", direccion=" + direccion
 				+ "]";
+	}
+	
+	
+	public void agregarPedidos(Pedido pedido) {
+		if(pedidos==null)pedidos=new ArrayList<>();
+		pedidos.add(pedido);
+		pedido.setCliente(this);//hace referencia al cliente en el que nos encontramos
 	}
 	
 	
