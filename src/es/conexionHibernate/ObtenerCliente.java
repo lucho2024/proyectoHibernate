@@ -27,12 +27,17 @@ public class ObtenerCliente {
 			
 			System.out.println(detallesCliente);
 			System.out.println(detallesCliente.getCliente());
-		
+			
+			System.out.println("Ahora vamos a borrar en cascada");
+			miSession.delete(detallesCliente);//Elimina
 			miSession.getTransaction().commit();//guardar en la base de datos
-			miSession.close();//cerrar la session
+			
+		}catch(Exception e) {
+			e.printStackTrace();
 			
 		} finally {
 			// TODO: handle finally clause
+			miSession.close();//cerrar la session
 			miFactory.close();
 		}
 
