@@ -1,6 +1,7 @@
 package es.conexionHibernate;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -25,12 +26,12 @@ public class CrearPedidosCliente {
 					
 					miSession.beginTransaction();//Empezar transacion;
 					//obtener el cliente de la tabla clientes
-					Cliente elCliente = miSession.get(Cliente.class, 5);
+					Cliente elCliente = miSession.get(Cliente.class, 6);
 					
 					//Crear pedidos del cliente
-					Pedido pedido1 = new Pedido(new Date(120,6,6),"efectivo");
-					Pedido pedido2 = new Pedido(new Date(120,7,2),"tarjeta");
-					Pedido pedido3 = new Pedido(new Date(120,8,4),"efectivo");
+					Pedido pedido1 = new Pedido(new GregorianCalendar(2020,7,5),"efectivo");
+					Pedido pedido2 = new Pedido(new GregorianCalendar(2020,6,15),"tarjeta");
+					Pedido pedido3 = new Pedido(new GregorianCalendar(2020,8,2),"efectivo");
 					
 					//agregar pedidos creados al cleinte creado
 					

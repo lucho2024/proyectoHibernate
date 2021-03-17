@@ -1,10 +1,13 @@
 package es.conexionHibernate;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class InsertaCliente {
+public class ObtenerPedidosCliente {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -20,23 +23,24 @@ public class InsertaCliente {
 				Session miSession=miFactory.openSession();
 
 				try {
-					Cliente cliente1 = new Cliente("luis","montoya","carrera 2");//instanciar objeto cliente
-					DetallesCliente detallesCliente =
-							new DetallesCliente("lucho.dev","242323","tecer cliente");//instanciar objeto cliente
 					
-					//asociar los objetos
-					cliente1.setDetallesCliente(detallesCliente);
-					//esto guarda la informacion de las dos tablas relacionadas
 					miSession.beginTransaction();//Empezar transacion;
-					miSession.save(cliente1);//Guardar cliente
+					//obtener el cliente de la tabla clientes
+					Cliente elCliente = miSession.get(Cliente.class, 6);					
 					miSession.getTransaction().commit();//guardar en la base de datos
-					System.out.println("Registro existoso");
+					System.out.println("Cliente: "+elCliente);
+					System.out.println("Pedidos : "+elCliente.getPedidos());
+					System.out.println("Registros existoso");
 					
-					miSession.close();//cerrar la session
 					
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
 				} finally {
 					// TODO: handle finally clause
 					miFactory.close();
+					miSession.close();//cerrar la session
 				}
 
 	}
